@@ -29,11 +29,11 @@ public class MazeConstructor : MonoBehaviour
         
     }
 
-    public void GenerateNewMaze(int sizeRow, int sizeCols, TriggerEventHandler startCallback = null, TriggerEventHandler goalCallback = null)
+    public void GenerateNewMaze(int sizeRows, int sizeCols, TriggerEventHandler startCallback = null, TriggerEventHandler goalCallback = null)
     {
         DisposeOldMaze();
 
-        data = _dataGenerator.FromDimensions(sizeRow, sizeCols);
+        data = _dataGenerator.FromDimensions(sizeRows, sizeCols);
 
        FindStartPosition();
        FindGoalPosition();
@@ -81,7 +81,7 @@ public class MazeConstructor : MonoBehaviour
 
         for (int i = 0; i <= rMax; i++)
         {
-            for (int j = 0; i <= cMax; j++)
+            for (int j = 0; j <= cMax; j++)
             {
                 if (maze[i, j] == 0)
                 {
@@ -102,7 +102,7 @@ public class MazeConstructor : MonoBehaviour
 
         for (int i = rMax; i >= 0; i--)
         {
-            for (int j = cMax; i >= 0; j--)
+            for (int j = cMax; j >= 0; j--)
             {
                 if (maze[i, j] == 0)
                 {
@@ -118,7 +118,7 @@ public class MazeConstructor : MonoBehaviour
     private void PlaceStartTrigger(TriggerEventHandler callback)
     {
         GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        go.transform.position = new Vector3(startRow * hallWidth, 0.5f, startCol * hallWidth);
+        go.transform.position = new Vector3(startCol * hallWidth, 0.5f, startRow * hallWidth);
         go.name = "StartTrigger";
         go.tag = "Generated";
 
@@ -132,7 +132,7 @@ public class MazeConstructor : MonoBehaviour
     private void PlaceGoalTrigger(TriggerEventHandler callback)
     {
         GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        go.transform.position = new Vector3(goalRow * hallWidth, 0.5f, goalCol * hallWidth);
+        go.transform.position = new Vector3(goalCol * hallWidth, 0.5f, goalRow * hallWidth);
         go.name = "GoalTrigger";
         go.tag = "Generated";
 

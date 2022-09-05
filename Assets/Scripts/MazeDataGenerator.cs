@@ -35,7 +35,7 @@ public class MazeDataGenerator
 
                         int a = Random.value < .5 ? 0 : (Random.value < .5 ? -1 : 1);
                         int b = a != 0 ? 0 : (Random.value < .5 ? -1 : 1);
-                        maze[i + a, j + b] = 1;
+                        maze[i+a, j+b] = 1;
                     }
                 }
             }

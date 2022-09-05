@@ -255,6 +255,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3687c905570c804381ac5efa0b30e90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1773131083}
+  timeLabel: {fileID: 1966176014}
+  scoreLabel: {fileID: 1280697454}
 --- !u!114 &518214444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,8 +335,8 @@ Light:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 100
-  m_SpotAngle: 90
-  m_InnerSpotAngle: 71.41338
+  m_SpotAngle: 70
+  m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -716,7 +719,7 @@ MonoBehaviour:
   headCam: {fileID: 1623668468}
   speed: 6
   gravity: -9.8
-  sensitivityHor: 9
+  sensitivityHor: 6
   sensitivityVert: 9
   minimumVert: -45
   maximumVert: 45

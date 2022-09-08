@@ -8,32 +8,30 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    //1
     [SerializeField] private FpsMovement player;
     [SerializeField] private Text timeLabel;
     [SerializeField] private Text scoreLabel;
 
     private MazeConstructor generator;
 
-    //2
     private DateTime startTime;
     private int timeLimit;
     private int reduceLimitBy;
+    private int diffNumber = 11;
 
     private int score;
     private bool goalReached;
 
-    //3
     void Start()
     {
         generator = GetComponent<MazeConstructor>();
-        StartNewGame();
+
+       // StartNewGame();
     }
 
-    //4
-    private void StartNewGame()
+    public void StartNewGame()
     {
-        timeLimit = 80;
+        timeLimit = 85;
         reduceLimitBy = 5;
         startTime = DateTime.Now;
 
@@ -43,25 +41,31 @@ public class GameController : MonoBehaviour
         StartNewMaze();
     }
 
-    //5
-    private void StartNewMaze()
+    private Vector3 GetStartPosition()
     {
-        generator.GenerateNewMaze(11, 11, OnStartTrigger, OnGoalTrigger);
-
         float x = generator.startCol * generator.hallWidth;
         float y = 1;
         float z = generator.startRow * generator.hallWidth;
-        player.transform.position = new Vector3(x, y, z);
+        Vector3 startPosition = new Vector3(x, y, z);
+        return  startPosition;
+    }
+
+    private void StartNewMaze()
+    {
+        generator.GenerateNewMaze(diffNumber, diffNumber, OnStartTrigger, OnGoalTrigger);
+
+        player.GetComponent<CharacterController>().enabled = false;
+        player.transform.position = GetStartPosition();
+        Debug.Log("Position changed");
+        player.GetComponent<CharacterController>().enabled = true;
 
         goalReached = false;
         player.enabled = true;
 
-        // restart timer
         timeLimit -= reduceLimitBy;
         startTime = DateTime.Now;
     }
 
-    //6
     void Update()
     {
         if (!player.enabled)
@@ -85,7 +89,6 @@ public class GameController : MonoBehaviour
         }
     }
 
-    //7
     private void OnGoalTrigger(GameObject trigger, GameObject other)
     {
         Debug.Log("Goal!");
@@ -106,5 +109,17 @@ public class GameController : MonoBehaviour
 
             Invoke("StartNewMaze", 4);
         }
+    }
+    public void EasyDiff()
+    {
+        diffNumber = 11;
+    }
+    public void MediumDiff()
+    {
+        diffNumber = 17;
+    }
+    public void HardDiff()
+    {
+        diffNumber = 25;
     }
 }

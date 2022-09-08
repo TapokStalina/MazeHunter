@@ -23,10 +23,8 @@ public class MazeConstructor : MonoBehaviour
 
     private void Awake()
     {
-
         _dataGenerator = new MazeDataGenerator();
         _meshGenerator = new MazeMeshGenerator();
-        
     }
 
     public void GenerateNewMaze(int sizeRows, int sizeCols, TriggerEventHandler startCallback = null, TriggerEventHandler goalCallback = null)
